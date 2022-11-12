@@ -1,0 +1,1 @@
+A helper library to scan json file and parser it to provide objects that can be recognized by C++ compiler.
