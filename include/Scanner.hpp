@@ -79,6 +79,7 @@ namespace jialuohu{
             JsonTokenType Scan();
             std::string GetValueString();
             float GetValueNumber();
+            void Rollback();
 
         private:
             bool IsAtEnd();
@@ -93,6 +94,7 @@ namespace jialuohu{
         private:
             std::string source_;    // json source
             size_t current_;       // current pos
+            size_t prev_;           // prev pos
 
             std::string value_string_;
             float value_number_;

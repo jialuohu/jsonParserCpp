@@ -109,7 +109,7 @@ namespace jialuohu{
             if (IsAtEnd()){
                 return JsonTokenType::END_OF_SOURCE;
             }
-
+            prev_ = current_;
             char c = Advance();
             switch (c)
             {
@@ -171,6 +171,10 @@ namespace jialuohu{
 
         float Scanner::GetValueNumber(){
             return value_number_;
+        }
+
+        void Scanner::Rollback(){
+            current_ = prev_;
         }
 
     }
