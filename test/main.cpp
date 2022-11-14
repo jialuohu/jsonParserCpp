@@ -1,9 +1,11 @@
 #include <iostream>
 #include "Scanner.hpp"
+#include "Parser.hpp"
+using std::endl, std::cout;
 
-
-int main(){
+void testScanner(){
     using namespace jialuohu::json;
+    
     auto source = R"(
     {
         "glossary" : {
@@ -29,6 +31,40 @@ int main(){
         }
         std::cout << '\n';
     }
+}
+
+void testParser(){
+    using namespace jialuohu::json;
+    auto source = R"(
+    {
+        "glossary" : {
+        "test": true,
+        "hello": null,
+        "hello2": "world\b\nwords!"
+        }
+    }
+    )";
+    auto source2 = "[1, 2, 3, 4, 5, \"Hello\"]";
+
+    Scanner scanner(source);
+    Scanner scanner2(source2);
+    Parser parser(scanner);
+    Parser parser2(scanner2);
+
+    JsonElement* res = parser.Parse();
+    JsonElement* res2 = parser2.Parse();
+
+    std::cout << res->Dumps()  << '\n';
+    std::cout << res2->Dumps()  << '\n';
+
+    delete res;
+}
+
+int main(){
+    // testScanner();
+    testParser();
+
+    
 
     return 0;
 }
