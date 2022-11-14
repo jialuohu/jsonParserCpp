@@ -54,10 +54,15 @@ void testParser(){
     JsonElement* res = parser.Parse();
     JsonElement* res2 = parser2.Parse();
 
+    JsonObject* obj = res->AsObject();
+    obj->insert({"tes", new JsonElement(20.0f)});
+
     std::cout << res->Dumps()  << '\n';
     std::cout << res2->Dumps()  << '\n';
 
+
     delete res;
+    delete res2;
 }
 
 int main(){

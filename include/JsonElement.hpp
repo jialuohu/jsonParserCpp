@@ -65,7 +65,7 @@ namespace jialuohu{
             JsonElement(JsonObject* value_object){ value(value_object);}
             JsonElement(JsonArray* value_array){ value(value_array);}
             JsonElement(std::string* value_string){ value(value_string);}
-            JsonElement(float* value_number){ value(value_number);}
+            JsonElement(float value_number){ value(value_number);}
             JsonElement(bool* value_bool){ value(value_bool);}
 
 
@@ -100,18 +100,22 @@ namespace jialuohu{
                     return value_.value_object;
                 }
                 Error("Type of JsonElement is not Object!");
+                return nullptr;
             }
+
             JsonArray* AsArray(){
                 if (type_ == Type::JSON_ARRAY){
                     return value_.value_array;
                 }
                 Error("Type of JsonElement is not Array!");
+                return nullptr;
             }
             std::string* AsString(){
                 if (type_ == Type::JSON_STRING){
                     return value_.value_string;
                 }
                 Error("Type of JsonElement is not String!");
+                return nullptr;
             }
             float AsNumber(){
                 if (type_ == Type::JSON_NUMBER){
@@ -199,6 +203,10 @@ namespace jialuohu{
                     delete val;
                 }
             }
+
+            public:
+                Type getType() {return type_;}
+                Value getValue() {return value_;}
 
 
             private:
